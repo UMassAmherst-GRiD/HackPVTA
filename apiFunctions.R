@@ -1,0 +1,119 @@
+# functions to pull data from the PVTA API
+# Mark Hagemann
+# 8/12/2015
+
+# following slides posted on http://www.r-bloggers.com/web-scraping-working-with-apis/
+# and infoPoint pdf documenting REST requests
+
+library(rjson)
+
+getCurrentMessages <- function() {
+  baseUrl <- "http://bustracker.pvta.com/InfoPoint/rest/"
+  urlAppendage <- "PublicMessages/GetCurrentMessages"
+  
+  queryUrl <- paste0(baseUrl, urlAppendage)
+  
+  lookUp <- URLencode(queryUrl)
+  
+  dat <- rjson::fromJSON(readLines(lookUp, warn = FALSE))
+  dat
+}
+
+# foo = getCurrentMessages()
+
+
+getVisibleRoutes <- function() {
+  baseUrl <- "http://bustracker.pvta.com/InfoPoint/rest/"
+  urlAppendage <- "routes/getvisibleroutes"
+  
+  queryUrl <- paste0(baseUrl, urlAppendage)
+  
+  lookUp <- URLencode(queryUrl)
+  
+  dat <- rjson::fromJSON(readLines(lookUp, warn = FALSE))
+  dat
+}
+
+# foo = getVisibleRoutes()
+
+
+getRoute <- function(routeID) {
+  baseUrl <- "http://bustracker.pvta.com/InfoPoint/rest/"
+  urlAppendage <- "routes/get/"
+  
+  queryUrl <- paste0(baseUrl, urlAppendage, routeID)
+  
+  lookUp <- URLencode(queryUrl)
+  
+  dat <- rjson::fromJSON(readLines(lookUp, warn = FALSE))
+  dat
+}
+
+
+getRouteDetails <- function(routeID = "all") {
+  baseUrl <- "http://bustracker.pvta.com/InfoPoint/rest/"
+  urlAppendage <- ifelse(routeID == "all", "routedetails/getallroutedetails", 
+                         paste0("routedetails/get/", routeID))
+  
+  queryUrl <- paste0(baseUrl, urlAppendage)
+  lookUp <- URLencode(queryUrl)
+  
+  dat <- rjson::fromJSON(readLines(lookUp, warn = FALSE))
+  dat
+}
+
+# foo = getRouteDetails()
+# length(foo)
+# str(foo, 2)
+
+
+getStops <- function(stopID = "all") {
+  baseUrl <- "http://bustracker.pvta.com/InfoPoint/rest/"
+  urlAppendage <- ifelse(stopID == "all", "stops/getallstops", 
+                         paste0("stops/get/", stopID))
+  
+  queryUrl <- paste0(baseUrl, urlAppendage)
+  lookUp <- URLencode(queryUrl)
+  
+  dat <- rjson::fromJSON(readLines(lookUp, warn = FALSE))
+  dat
+}
+
+# foo = getStops()
+# length(foo)
+# str(foo[[2]], 2)
+# getStops(1000)
+
+
+getDepartures <- function(stopID) {
+  baseUrl <- "http://bustracker.pvta.com/InfoPoint/rest/"
+  urlAppendage <- paste0("stopdepartures/get/", stopID)
+  
+  queryUrl <- paste0(baseUrl, urlAppendage)
+  lookUp <- URLencode(queryUrl)
+  
+  dat <- rjson::fromJSON(readLines(lookUp, warn = FALSE))
+  dat
+}
+
+# foo = getDepartures(1000)
+# str(foo, 4)
+
+
+getVehicles <- function(routeID = "all") {
+  baseUrl <- "http://bustracker.pvta.com/InfoPoint/rest/"
+  urlAppendage <- ifelse(routeID == "all", "vehicles/getallvehicles", 
+                         paste0("vehicles/getallvehiclesforroute?routeID=", routeID))
+  
+  queryUrl <- paste0(baseUrl, urlAppendage)
+  lookUp <- URLencode(queryUrl)
+  
+  dat <- rjson::fromJSON(readLines(lookUp, warn = FALSE))
+  dat
+}
+
+# foo = getVehicles()
+# length(foo)
+# str(foo, 2)
+# 
+# getVehicles(routeID = "20030")
