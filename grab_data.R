@@ -2,7 +2,8 @@
 # on specific time increments and then saving those to a 
 # file. 
 
-# WARNING : Not yet debugged. 
+library(erer)
+
 
 visRtsToDF <- function() {
   # Parsing data from all routes and then
@@ -28,28 +29,30 @@ min_sleep <- function (time){
 
 
 # Number of data calls to take 
-data_calls_num = 3
+data_calls_num = 4
 
 # Time to wait between sampling (in mins)
 wait = 0.1
 
 # Number of times to iterate before you dump data to file
-dump = 1
+dump = data_calls_num-1
 
-data <- vector(mode="list",length = data_calls_num)
+data <- vector(mode="list",length = dump)
 
 j = 1 
 
 for (i in 1:data_calls_num){
   # Call for new data and append to list.
-  data[j] <- visRtsToDF()
+  data[j] <- list(visRtsToDF())
   
   if(i%%dump == 0){
     # Every dump iterations, dump data to a file
-#      lapply(data, write, "pvta_route_data.txt", append=TRUE)
- #     j = 0      
+    for(k in 1:dump){
+      write.list(z=data[k],file="pvta_route_data.csv")  
+    }
+    j = 0
   }
   
-  j = j+1 # Move to next element
+  j=j+1 # Move to next element
  # min_sleep(wait) 
 }
