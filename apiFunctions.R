@@ -117,3 +117,22 @@ getVehicles <- function(routeID = "all") {
 # str(foo, 2)
 # 
 # getVehicles(routeID = "20030")
+
+
+# convert date to POSIX datetime
+
+toTime <- function(datestr) {
+  numbstr = strsplit(datestr, "\\(|\\)")[[1]][2]
+  seconds = strsplit(numbstr, "-")[[1]]
+  as.POSIXct(as.numeric(seconds[1]) / 1000, origin = "1970-01-01 00:00:00")
+}
+# 
+# foo = getVehicles(routeID = "20030")[[1]]$LastUpdated
+# bar = foo
+# toTime(foo)
+# while (toTime(foo) == toTime(bar)) {
+#   Sys.sleep(1)
+#   bar = getVehicles(routeID = "20030")[[1]]$LastUpdated
+# }
+# toTime(foo)
+# toTime(bar)
