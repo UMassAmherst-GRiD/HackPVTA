@@ -5,6 +5,7 @@
 library(erer)
 
 
+
 visRtsToDF <- function() {
   # Parsing data from all routes and then
   # turning the data from JSON to data frame
@@ -47,10 +48,8 @@ for (i in 1:data_calls_num){
   
   if(i%%dump == 0){
     # Every dump iterations, dump data to a file
-    for(k in 1:dump){
-      write.list(z=data[k],file="pvta_route_data.csv")  
-    }
-    j = 0
+      write.list(data,file="pvta_route_data.csv")  
+      j = 0
   }
   
   j=j+1 # Move to next element
