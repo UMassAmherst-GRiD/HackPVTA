@@ -136,3 +136,46 @@ toTime <- function(datestr) {
 # }
 # toTime(foo)
 # toTime(bar)
+
+
+#'
+#' Fetch visible routes, convert to data.frame
+
+visRtsToDF <- function() {
+  library(dplyr)
+  visRts = getVisibleRoutes()
+  
+  rtToDF <- function(lst) {
+    lst[sapply(lst, is.null)] <- NA
+    as.data.frame(lst)
+  }
+  
+  visRts_df = lapply(visRts, rtToDF)
+  out = rbind_all(visRts_df)
+  out
+}
+
+
+#'
+#' Function to fetch route details, put some of them into data.frame.
+#' NOT ESPECIALLY USEFUL, SINCE DATA IS REDUNDANT WITH visRtsToDF
+bindRtDeets <- function() {
+  rtDeets = getRouteDetails()
+  trimDeets<- function(lst) {
+    lst <- lst[1:16]
+    lst[sapply(lst, is.null)] = NA
+    as.data.frame(lst[1:16])
+  }
+  rbind_all(lapply(rtDeets, trimDeets))
+}
+
+
+#'
+#' Function to get route ID from a route shortname
+#' 
+#' @param shortname a character giving the short name, e.g. "B34", "31"
+getRouteID <- function(shortname) {
+  data(mostRtDetails)
+  out = mostRtDetails[mostRtDetails$ShortName == shortname, "RouteId"]
+  as.numeric(out)
+}
