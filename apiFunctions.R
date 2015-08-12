@@ -66,7 +66,6 @@ getRouteDetails <- function(routeID = "all") {
 # length(foo)
 # str(foo, 2)
 
-
 getStops <- function(stopID = "all") {
   baseUrl <- "http://bustracker.pvta.com/InfoPoint/rest/"
   urlAppendage <- ifelse(stopID == "all", "stops/getallstops", 
@@ -83,7 +82,6 @@ getStops <- function(stopID = "all") {
 # length(foo)
 # str(foo[[2]], 2)
 # getStops(1000)
-
 
 getDepartures <- function(stopID) {
   baseUrl <- "http://bustracker.pvta.com/InfoPoint/rest/"
