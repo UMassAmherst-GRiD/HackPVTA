@@ -2,6 +2,8 @@
 # on specific time increments and then saving those to a 
 # file. 
 
+# WARNING : Not yet debugged. 
+
 visRtsToDF <- function() {
   # Parsing data from all routes and then
   # turning the data from JSON to data frame
@@ -34,14 +36,20 @@ wait = 0.1
 # Number of times to iterate before you dump data to file
 dump = 1
 
-data <- list(visRtsToDF())
+data <- vector(mode="list",length = data_calls_num)
+
+j = 1 
 
 for (i in 1:data_calls_num){
-  # Append things to the list
-  data <- list(visRtsToDF(),data)
+  # Call for new data and append to list.
+  data[j] <- visRtsToDF()
+  
   if(i%%dump == 0){
     # Every dump iterations, dump data to a file
-    
+#      lapply(data, write, "pvta_route_data.txt", append=TRUE)
+ #     j = 0      
+  }
   
-  } 
+  j = j+1 # Move to next element
+ # min_sleep(wait) 
 }
