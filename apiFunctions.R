@@ -179,3 +179,16 @@ getRouteID <- function(shortname) {
   out = mostRtDetails[mostRtDetails$ShortName == shortname, "RouteId"]
   as.numeric(out)
 }
+
+#' 
+#' Function to get all vehicles information into a data.frame
+#' 
+
+nullToNa <- function(lst) {lst[sapply(lst, is.null)] = NA; lst}
+
+vehicsToDf = function() {
+  vehs = getVehicles()
+  dfs = lapply(vehs, function(lst) as.data.frame(nullToNa(lst)))
+  out = rbind_all(dfs)
+  out
+}
