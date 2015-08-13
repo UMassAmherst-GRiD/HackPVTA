@@ -66,7 +66,6 @@ getRouteDetails <- function(routeID = "all") {
 # length(foo)
 # str(foo, 2)
 
-
 getStops <- function(stopID = "all") {
   baseUrl <- "http://bustracker.pvta.com/InfoPoint/rest/"
   urlAppendage <- ifelse(stopID == "all", "stops/getallstops", 
@@ -83,7 +82,6 @@ getStops <- function(stopID = "all") {
 # length(foo)
 # str(foo[[2]], 2)
 # getStops(1000)
-
 
 getDepartures <- function(stopID) {
   baseUrl <- "http://bustracker.pvta.com/InfoPoint/rest/"
@@ -179,6 +177,7 @@ getRouteID <- function(shortname) {
   out = mostRtDetails[mostRtDetails$ShortName == shortname, "RouteId"]
   as.numeric(out)
 }
+<<<<<<< HEAD
 
 #' 
 #' Function to get all vehicles information into a data.frame
@@ -192,3 +191,5 @@ vehicsToDf = function() {
   out = rbind_all(dfs)
   out
 }
+=======
+>>>>>>> 00d7394aad820472eb41f8b058c9545c9f573aa5
