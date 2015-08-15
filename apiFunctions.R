@@ -6,6 +6,7 @@
 # and infoPoint pdf documenting REST requests
 
 library(rjson)
+library(dplyr)
 
 getCurrentMessages <- function() {
   baseUrl <- "http://bustracker.pvta.com/InfoPoint/rest/"
@@ -120,9 +121,9 @@ getVehicles <- function(routeID = "all") {
 # convert date to POSIX datetime
 
 toTime <- function(datestr) {
-  numbstr = strsplit(datestr, "\\(|\\)")[[1]][2]
-  seconds = strsplit(numbstr, "-")[[1]]
-  as.POSIXct(as.numeric(seconds[1]) / 1000, origin = "1970-01-01 00:00:00")
+  numbstr = vapply(strsplit(datestr, "\\(|-"), `[`, character(1), 2)
+  seconds = as.numeric(numbstr)
+  as.POSIXct(as.numeric(seconds) / 1000, origin = "1970-01-01 00:00:00")
 }
 # 
 # foo = getVehicles(routeID = "20030")[[1]]$LastUpdated
@@ -177,7 +178,7 @@ getRouteID <- function(shortname) {
   out = mostRtDetails[mostRtDetails$ShortName == shortname, "RouteId"]
   as.numeric(out)
 }
-<<<<<<< HEAD
+
 
 #' 
 #' Function to get all vehicles information into a data.frame
@@ -191,5 +192,15 @@ vehicsToDf = function() {
   out = rbind_all(dfs)
   out
 }
-=======
->>>>>>> 00d7394aad820472eb41f8b058c9545c9f573aa5
+
+
+#
+# Function to get Stops structured object into data.frame
+#
+
+stopsToDF <- function(stopList) {
+  out <- rbind_all(lapply(stopList, as.data.frame))
+  out
+}
+
+# foo = stopsToDF(getStops())
