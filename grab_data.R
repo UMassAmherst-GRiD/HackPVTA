@@ -5,7 +5,6 @@
 library(erer)
 
 
-
 visRtsToDF <- function() {
   # Parsing data from all routes and then
   # turning the data from JSON to data frame
@@ -55,3 +54,4 @@ for (i in 1:data_calls_num){
   j=j+1 # Move to next element
  # min_sleep(wait) 
 }
+
