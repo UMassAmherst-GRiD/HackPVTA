@@ -1,6 +1,8 @@
 # Script to pull bus location data, save periodically 
 
 dir.create("data/busLocations")
+source("apiFunctions.R")
+
 curdf <- data.frame()
 olddf <- data.frame()
 i = 0
