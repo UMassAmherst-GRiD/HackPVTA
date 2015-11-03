@@ -1,0 +1,122 @@
+---
+title: "rpvta intro"
+author: "Mark Hagemann"
+date: "11/02/2015"
+output: ioslides_presentation
+---
+
+```{r, message=FALSE, warning = FALSE, echo = FALSE}
+library(knitr)
+opts_chunk$set(message = FALSE, warning = FALSE)
+```
+
+
+## Outline
+
+- What data does PVTA collect?
+- How can we access this data?
+    - API
+    - rpvta package
+- What do the data look like?
+- What can we do with the data?
+
+## PVTA
+
+<img src="images/pvtaBus.jpg" alt="PVTA bus" style="width: 800px;"/>
+
+## What about the bus tracker?
+
+[Yes, they have one!](http://bustracker.pvta.com/InfoPoint)
+
+- Only shows snapshot of current system.
+- No way to access legacy data.
+
+## REST API
+
+- stands for *Representational State Transfer* (but that's not important)
+- Uses HTTP, the same protocol used to access web pages. 
+- Need to know the syntax (inputs) and data structure (output)
+    - [We have a pdf for this.](https://github.com/UMassAmherst-GRiD/HackPVTA/blob/master/availreal-timeapi.pdf) 
+
+## PVTA API example:
+
+Route information for B43: http://bustracker.pvta.com/InfoPoint/rest/routes/get/30043
+
+In order to use this I have to know: 
+
+- B43 is route ID 30043
+- how to construct the http request
+- how to interpret the results
+
+## Another one (more complicated)
+
+Route details for B43: http://bustracker.pvta.com/InfoPoint/rest/routedetails/get/30043
+
+## R function to do the same thing:
+
+```{r}
+# library(devtools)
+# install_github("umassamherst-Grid/rpvta")
+library(rpvta)
+getRouteDetails
+```
+
+## The output of this function
+```{r}
+b43details <- getRouteDetails(30043)
+str(b43details, 1)
+```
+
+## What else is in rpvta?
+
+```{r}
+ls("package:rpvta")
+```
+
+## More on rpvta package
+
+Caveats:
+
+- This is a quick-and-dirty package. 
+- Documentation is lacking
+- Function names are not consistent
+- Function output is not consistent
+
+You can help! 
+
+- Clone the repo: https://github.com/UMassAmherst-GRiD/rpvta
+- Submit a pull request
+- Great way to learn about package structure
+
+## State of the project
+
+```
+PVTA REST API %>%
+rpvta package functions %>%
+logging script on "the cloud" %>%
+data/busLocations directory in **UMassAmherst-GRiD/HackPVTA** github repo
+```
+
+## Exercise: 
+
+Using RStudio, clone HackPVTA repo to your computer
+
+- Open `starterScript.R` to get started
+- Have a look at the data:
+
+```{r}
+glimpse(locs)
+```
+
+## What we want to predict
+
+```{r}
+library(ggplot2)
+library(dplyr)
+locs %>%
+  filter(RouteId == 30043, LastStop == "Haigis Mall") %>%
+#   glimpse()
+  ggplot(aes(x = Deviation)) + 
+  geom_histogram(binwidth = 5)
+```
+

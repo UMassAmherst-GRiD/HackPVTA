@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns:atom="http://www.w3.org/2005/Atom" xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Transit/PVTARoutes (MapServer)</name>
+    <atom:link type="text/html" href="http://services.massdot.state.ma.us/ArcGIS/rest/services/Transit/PVTARoutes/MapServer" rel="alternate" />
+    <Placemark>
+      <name>Transit/PVTARoutes (MapServer)</name>
+      <Snippet><![CDATA[]]></Snippet>
+      <description><![CDATA[
+<table>
+<tr valign="top">
+<td>
+<img src="http://services.massdot.state.ma.us/ArcGIS/rest/services/Transit/PVTARoutes/MapServer/export?bbox=-8108520.60221765,5155389.06737119,-8037255.46829866,5236966.05472936&imageSR=4326&size=150,150&f=image"/>
+<br/><a href="http://services.massdot.state.ma.us/ArcGIS/rest/services/Transit/PVTARoutes/MapServer">More...</a></td>
+</td>
+<td>
+Title: <b></b><br />
+Author: <b></b><br />
+Comments: <b></b><br />
+Subject: <b></b><br />
+Category: <b></b><br />
+Keywords: <b></b><br />
+Credits: <b></b><br />
+</td>
+</tr>
+</table>
+<br/>
+<b>View In:</b>
+&nbsp;&nbsp;<a href="http://services.massdot.state.ma.us/ArcGIS/rest/services/Transit/PVTARoutes/MapServer?f=lyr">ArcMap</a>
+&nbsp;&nbsp;<a href="http://services.massdot.state.ma.us/ArcGIS/rest/services/Transit/PVTARoutes/MapServer?f=nmf">ArcGIS Explorer</a>
+&nbsp;&nbsp;<a href="http://services.massdot.state.ma.us/ArcGIS/rest/services/Transit/PVTARoutes/MapServer?f=jsapi" target="_blank">ArcGIS JavaScript</a>
+&nbsp;&nbsp;<a href="http://services.massdot.state.ma.us/ArcGIS/rest/services/Transit/PVTARoutes/MapServer/kml/mapImage.kmz">Google Earth</a>
+<br/><br/>
+<b>Service Description:</b> 
+<br/><br/>
+<b>Description:</b> 
+<br/><br/>
+<b>Copyright Text:</b> 
+<br/><br/>
+<b>Layers: </b>PVTA Routes<br /><br />
+<b>Full Extent: </b>[-8108520.60221765, 5155389.06737119] - [-8037255.46829866, 5236966.05472936]
+<br/><br/>
+<b>Supported Interfaces: </b>
+&nbsp;&nbsp;<a href="http://services.massdot.state.ma.us/ArcGIS/rest/services/Transit/PVTARoutes/MapServer?f=json&pretty=true">REST</a>
+&nbsp;&nbsp;<a href="http://DMZ-WBP-BOS-V01/ArcGIS/services/Transit/PVTARoutes/MapServer?wsdl">SOAP</a>
+<br/>
+]]></description>
+      <LookAt>
+        <longitude>-72.5199870905802</longitude>
+        <latitude>42.2339579803789</latitude>
+        <range>2500000</range>
+      </LookAt>
+      <Point>
+        <coordinates>-72.5199870905802,42.2339579803789,0</coordinates>
+      </Point>
+    </Placemark>
+  </Document>
+</kml>
