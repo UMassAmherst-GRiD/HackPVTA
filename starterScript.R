@@ -1,17 +1,17 @@
 # load dependencies
 
 if(!require(devtools)) {
-  install.packages(devtools)
+  install.packages("devtools")
   library(devtools)
 }
 
 if(!require(dplyr)) {
-  install.packages(dplyr)
+  install.packages("dplyr")
   library(dplyr)
 }
 
 if(!require(ggplot2)) {
-  install.packages(ggplot2)
+  install.packages("ggplot2")
   library(ggplot2)
 }
   
