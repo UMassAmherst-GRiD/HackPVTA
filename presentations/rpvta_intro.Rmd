@@ -7,7 +7,10 @@ output: ioslides_presentation
 
 ```{r, message=FALSE, warning = FALSE, echo = FALSE}
 library(knitr)
+library(rpvta)
+library(dplyr)
 opts_chunk$set(message = FALSE, warning = FALSE)
+load("../data/mostRtDetails.rda")
 ```
 
 
@@ -105,10 +108,23 @@ Using RStudio, clone HackPVTA repo to your computer
 - Have a look at the data:
 
 ```{r}
+source("../assembleData.R")
 glimpse(locs)
 ```
 
-## What we want to predict
+## Prediction ideas
+
+- Waiting time for a given location, time, route, direction
+    - Given bus locations at that time
+    - Absent that information
+    - Distribution of waiting times
+- Bus punctuality as function of:
+    - time of day
+    - day of week
+    - vehicle
+    - punctuality of other buses
+
+## Example: distribution of B43 tardiness to Haigis Mall
 
 ```{r}
 library(ggplot2)
