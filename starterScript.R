@@ -35,9 +35,6 @@ locs %>%
   ggplot(aes(x = Deviation)) + 
   geom_histogram(binwidth = 5)
 
-# Make a time columns
-
-locs$datetime <- toTime(locs$LastUpdated)
 
 
 

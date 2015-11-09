@@ -12,10 +12,11 @@ locenv <- new.env()
 lapply(dataFiles, load, envir = locenv, verbose = TRUE)
 
 # get information that we'll join to locs (this is a saved object in the rpvta package)
-data(mostRtDetails)
+#load("data/mostRtDetails.rda")
 
 # combine all the data frames into one
 locs <- dplyr::bind_rows(as.list(locenv)) %>%
-  left_join(mostRtDetails[2:6], by = "RouteId")
+  left_join(mostRtDetails[2:6], by = "RouteId") %>%
+  mutate(datetime = toTime(locs$LastUpdated))
 
 
